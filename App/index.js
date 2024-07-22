@@ -1,53 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// Filename: index.js
+// Combined code from all files
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
-const App = () => {
-  const fullText = 'Hi, this is Apply.\nCreating mobile apps is now as simple as typing text.\nJust input your idea and press APPLY, and our platform does the rest...';
-  const [displayedText, setDisplayedText] = useState('');
-  const [index, setIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setDisplayedText((prev) => prev + fullText[index]);
-      setIndex((prev) => {
-        if (prev === fullText.length - 1) {
-          setIsPaused(true);
-          setTimeout(() => {
-            setDisplayedText('');
-            setIndex(0);
-            setIsPaused(false);
-          }, 2000);
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [index, isPaused]);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{displayedText}</Text>
-    </View>
-  );
-};
+export default function App() {
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.title}>Hello!</Text>
+        </SafeAreaView>
+    );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'black',
-    padding: 20,
-  },
-  text: {
-    color: 'white',
-    fontSize: 24,
-    fontFamily: 'monospace',
-  },
+    container: {
+        padding: '20px',
+        backgroundColor: '#FFFFFF',
+        height: '100vh',
+        marginTop: '30px', // Avoid overlapping with the status bar
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
 });
-
-export default App;
